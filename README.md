@@ -89,7 +89,7 @@ Presents a final summary and closes the interview.
 1. **Clone the repo** and set up the virtual environment:
 
    ```bash
-   git clone your-repo-url
+   git clone https://github.com/Shreyankthehacker/AI-Interviewer.git
    cd ai-interviewer
    python -m venv venv && source venv/bin/activate
    pip install -r requirements.txt
