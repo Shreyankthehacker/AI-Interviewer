@@ -23,7 +23,7 @@ The AI Interviewer mimics a professional interview setup, asking progressively c
 
 ## 🔁 Interview Flow
 
-![AI Interviewer](images/ai_interviewer.png)
+![AI Interviewer](image.png)
 
 ### 1. `start_message`
 
