@@ -10,3 +10,4 @@ class State(BaseModel):
     summary: str = Field(default="", description="Summary of the whole conversation")
     cheating_penalty: int = Field(default=0, description="Penalty applied due to cheating detection")
     count:int = Field(default = 0 , description= "using this because i might need to access questions and answers with this ")
+
