@@ -9,6 +9,7 @@ from prompts import system_msg,cheating_prompt,grading_prompt,initial_message,in
 from utils.stt import transcribe
 from utils.tts import audio
 
+
 dotenv.load_dotenv()
 llm = ChatGoogleGenerativeAI(model = 'gemini-1.5-flash')
 
@@ -58,29 +59,49 @@ def call_model(state: State):
     ]
 
     question = llm.invoke(messages)
+    
     question_text = question.content if hasattr(question, "content") else str(question)
+    print(question , question_text)
+    audio(question_text)
     print("Generated Question:", question_text)
 
     
     state.questions.append(question_text)
 
-    
-    audio(question_text)  
-    #play_audio("output.wav")  
-
     return {"questions": state.questions}
 
 
+import os
+import time
+
 def human_answer(state: State):
     print("Listening for answer...")
-
-    #record_audio("input.wav")  
-    answer = transcribe("input.wav")  
-
+    
+    # Wait for the answer.mp3 file to appear
+    file_path = "answer"+str(state.count)+".mp3"
+    max_wait_time = 60  # maximum wait time in seconds
+    check_interval = 1  # check every second
+    
+    print(f"Waiting for {file_path} to appear...")
+    waited_time = 0
+    
+    while waited_time < max_wait_time:
+        if os.path.exists(file_path):
+            print(f"Found {file_path}, proceeding with transcription")
+            break
+        time.sleep(check_interval)
+        waited_time += check_interval
+        
+    if waited_time >= max_wait_time:
+        print(f"Timeout waiting for {file_path}")
+        return {"error": "Timeout waiting for audio file", "answers": state.answers}
+    
+    # Now that the file exists, transcribe it
+    answer = transcribe(file_path)
+    
     print("Transcribed Answer:", answer)
     state.answers.append(answer)
     return {"answers": state.answers}
-
 
 def start_message(state):
     return {
