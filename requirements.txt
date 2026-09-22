@@ -1,0 +1,27 @@
+# Core web app
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.7.0
+python-dotenv>=1.0.1
+requests>=2.32.0
+
+# AI / LLM / agent stack
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+google-genai>=1.0.0
+google-generativeai>=0.8.0
+google-adk>=0.1.0
+
+# Audio / speech
+gTTS>=2.3.0
+whisper>=1.1.10
+scipy>=1.11.0
+pyaudio
+
+# Frontend
+streamlit>=1.35.0
+streamlit-lottie
+
+# Optional, commonly needed for file uploads/forms
+# python-multipart>=0.0.9
